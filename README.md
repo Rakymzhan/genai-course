@@ -1,11 +1,11 @@
 # genai-course
-https://jdk.java.net/archive/
-https://git.epam.com/epm-cdp/global-java-foundation-program/java-courses.git
 
-git clone https://$MY-LOGIN:$MY-PAT@git.epam.com/epm-cdp/global-java-foundation-program/java-courses.git
+Task 1:
+To run task 1 set next VM options:
+    -DAZURE_OPEN_AI_DEPLOYMENT_NAME=gpt-4o
+    -DAZURE_OPEN_AI_KEY=${your-api-key}
+    -DAZURE_OPEN_AI_ENDPOINT=https://ai-proxy.lab.epam.com
 
-My repo: https://github.com/Rakymzhan/genai-course.git
-
-Azure OpenAI Service Endpoint: https://ai-proxy.lab.epam.com/openai/models
-
-cURL example: curl -s "https://ai-proxy.lab.epam.com/openai/models" -H "Api-Key: $MY-API-KEY"
+cURL examples:
+    Plain text response: curl --location 'http://localhost:8088/api/books/topN/sample1?input=I%20want%20to%20find%20top-10%20books%20about%20world%20history'
+    JSON response: curl --location 'http://localhost:8088/api/books/topN/sample2?input=I%20want%20to%20find%20top-10%20books%20about%20world%20history'
