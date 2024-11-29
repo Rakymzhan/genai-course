@@ -12,6 +12,7 @@ import io.qdrant.client.grpc.Points.ScoredPoint;
 import io.qdrant.client.grpc.Points.SearchPoints;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -32,6 +33,7 @@ import static io.qdrant.client.WithPayloadSelectorFactory.enable;
  * It also provides functionality to search for similar vectors based on input text.
  */
 
+@Profile("qdrant")
 @Slf4j
 @Service
 @AllArgsConstructor

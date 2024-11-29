@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "Books": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Author": {
+            "type": "string"
+          },
+          "YearOfPublish": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Name", "Author", "YearOfPublish"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "Books"
+  ],
+  "additionalProperties": false
+}

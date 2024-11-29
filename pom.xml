@@ -21,6 +21,7 @@
         <io.qdrant.client.version>1.12.0</io.qdrant.client.version>
         <io.grpc.version>1.68.1</io.grpc.version>
         <protobuf-java.version>4.28.3</protobuf-java.version>
+<!--        <victools.version>4.37.0</victools.version>-->
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,6 +68,15 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.victools</groupId>
+            <artifactId>jsonschema-generator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.victools</groupId>
+            <artifactId>jsonschema-module-jackson</artifactId>
         </dependency>
 
         <!-- Test dependencies -->
@@ -125,6 +135,17 @@
                 <artifactId>azure-ai-openai</artifactId>
                 <version>1.0.0-beta.12</version>
             </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>com.github.victools</groupId>-->
+<!--                <artifactId>jsonschema-generator</artifactId>-->
+<!--                <version>${victools.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.github.victools</groupId>-->
+<!--                <artifactId>jsonschema-module-jackson</artifactId>-->
+<!--                <version>${victools.version}</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 

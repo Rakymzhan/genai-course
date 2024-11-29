@@ -4,6 +4,7 @@ import io.qdrant.client.QdrantClient;
 import io.qdrant.client.QdrantGrpcClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 /**
  * Configuration class for setting up the Qdrant Client.
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * Qdrant instance running at the specified host and port.
  */
 
+@Profile("qdrant")
 @Configuration
 public class QdrantConfiguration {
 
