@@ -1,71 +1,108 @@
 package com.epam.training.service;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
-import com.azure.ai.openai.models.ChatCompletions;
-import com.azure.ai.openai.models.ChatCompletionsOptions;
-import com.azure.ai.openai.models.ChatRequestUserMessage;
-import com.epam.training.component.ResponseFormatFactory;
-import com.epam.training.exception.AiEmptyResponseException;
-import com.microsoft.semantickernel.Kernel;
-import com.microsoft.semantickernel.orchestration.FunctionResult;
-import com.microsoft.semantickernel.orchestration.PromptExecutionSettings;
-import org.springframework.beans.factory.annotation.Value;
+import com.epam.training.component.RequestEnricher;
+import com.epam.training.component.ResponseParser;
+import com.epam.training.dto.Comparison;
+import com.epam.training.dto.book.Book;
+import com.epam.training.dto.book.BookRequest;
+import com.epam.training.dto.book.BookResponse;
+import com.epam.training.dto.book.BookResponseList;
+import com.epam.training.dto.deployment.DeploymentResponse;
+import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
+import com.microsoft.semantickernel.orchestration.InvocationContext;
+import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
+import com.microsoft.semantickernel.services.chatcompletion.ChatHistory;
+import com.microsoft.semantickernel.services.chatcompletion.ChatMessageContent;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class BooksServiceImpl implements BooksService {
 
-    private static final String BOOK_JSON_SCHEMA_NAME = "book_result";
+    private static final String SYSTEM_MESSAGE = "You are a scientist of World History and you can help users to find the best books of history.";
 
     private final OpenAIAsyncClient aiAsyncClient;
 
-    private final Kernel kernel;
+    private final DialApiProxy dialApiProxy;
 
-    private final ResponseFormatFactory responseFormatFactory;
+    private final RequestEnricher requestEnricher;
 
-    private final String deploymentOrModelName;
-
-    public BooksServiceImpl(OpenAIAsyncClient aiAsyncClient,
-                            Kernel kernel,
-                            ResponseFormatFactory responseFormatFactory,
-                            @Value("${client-azureopenai-deployment-name}") String deploymentOrModelName) {
-        this.aiAsyncClient = aiAsyncClient;
-        this.deploymentOrModelName = deploymentOrModelName;
-        this.kernel = kernel;
-        this.responseFormatFactory = responseFormatFactory;
-    }
+    private final ResponseParser responseParser;
 
     @Override
-    public String getBooksSample1(String prompt) {
-        var chatCompletions = aiAsyncClient.getChatCompletions(deploymentOrModelName,
-                new ChatCompletionsOptions(List.of(new ChatRequestUserMessage(prompt))))
-                .block();
-        var messages = Optional.ofNullable(chatCompletions)
-                .map(ChatCompletions::getChoices).stream()
-                .flatMap(Collection::stream)
-                .map(chatChoice -> chatChoice.getMessage().getContent())
-                .toList();
+    public BookResponseList getBooks(BookRequest request) {
+        DeploymentResponse deploymentResponse = dialApiProxy.getDeployments();
 
-        return messages.getFirst();
+        List<BookResponse> responses = new ArrayList<>(deploymentResponse.data().size());
+        deploymentResponse.data().forEach(deployment -> {
+            log.info("Trying to retrieve data from model: {}", deployment.id());
+
+            InvocationContext context = requestEnricher.enrich(request, deployment.id());
+
+            ChatHistory chatHistory = new ChatHistory();
+            chatHistory.addSystemMessage(SYSTEM_MESSAGE);
+            chatHistory.addUserMessage(request.getPrompt());
+
+            ChatCompletionService chatCompletionService = OpenAIChatCompletion.builder()
+                    .withOpenAIAsyncClient(aiAsyncClient)
+                    .withModelId(deployment.id())
+                    .build();
+
+            List<ChatMessageContent<?>> contents = chatCompletionService.getChatMessageContentsAsync(
+                    chatHistory, null, context)
+                    .block();
+
+            String responseContent = contents.stream()
+                    .map(ChatMessageContent::getContent)
+                    .toList()
+                    .getFirst();
+
+            log.info("Response received from model: {}", deployment.id());
+            log.info("Response received: {}", responseContent);
+
+            BookResponse bookResponse = responseParser.mapToBookResponse(deployment.id(), responseContent);
+            if (!bookResponse.getBooks().isEmpty()) {
+                responses.add(bookResponse);
+            }
+        });
+
+        compareResponses(responses);
+
+        return new BookResponseList(responses);
     }
 
-    @Override
-    public String getBooksSample2(String prompt) {
-        PromptExecutionSettings executionSettings = PromptExecutionSettings.builder()
-                .withResponseFormat(responseFormatFactory.createJsonResponseFormat(BOOK_JSON_SCHEMA_NAME))
-                .withMaxTokens(16384)
-                .build();
-        var result = kernel.invokePromptAsync(prompt)
-                .withPromptExecutionSettings(executionSettings)
-                .block();
+    private static void compareResponses(List<BookResponse> responses) {
+        responses.forEach(bookResponse -> {
+            List<BookResponse> others = responses.stream()
+                    .filter(resp -> !resp.equals(bookResponse))
+                    .toList();
+            List<Comparison> comparisons = new ArrayList<>(others.size());
+            others.forEach(otherResponse -> {
+                comparisons.add(new Comparison(otherResponse.getModelId(), compare(bookResponse, otherResponse)));
+            });
 
-        return Optional.ofNullable(result)
-                .map(FunctionResult::getResult)
-                .map(Object::toString)
-                .orElseThrow(AiEmptyResponseException::new);
+            bookResponse.setComparisons(comparisons);
+        });
+    }
+
+    private static double compare(BookResponse first, BookResponse second) {
+        int matchCount = 0;
+        int bookCount = first.getBooks().size();
+        for (Book book : first.getBooks()) {
+            if (second.getBooks().contains(book)) {
+                matchCount++;
+            }
+        }
+
+        return ((double) matchCount / bookCount) * 100;
     }
 }

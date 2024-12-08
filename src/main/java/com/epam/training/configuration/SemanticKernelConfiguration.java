@@ -23,7 +23,7 @@ import java.util.Map;
  * chat completion services, kernel plugins, kernel instance, invocation context,
  * and prompt execution settings.
  */
-@Configuration
+//@Configuration
 public class SemanticKernelConfiguration {
 
     /**

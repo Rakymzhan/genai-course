@@ -1,6 +1,7 @@
 package com.epam.training.controllers;
 
-import com.epam.training.promt.SimplePromptService;
+import com.epam.training.dto.book.BookRequest;
+import com.epam.training.dto.book.BookResponseList;
 import com.epam.training.service.BooksService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,28 +13,14 @@ public class BooksController {
 
     private final BooksService booksService;
 
-    private final SimplePromptService simplePromptService;
-
     /**
-     * Returns answer plain text
+     * Receives a request {@link BookRequest} and calls service method
      *
-     * @param input the prompt that a user entered
-     * @return plain text
+     * @param request the request object {@link BookRequest}
+     * @return the ChatGPT answer in JSON
      */
-    @GetMapping(value = "/topN/sample1")
-    @ResponseBody
-    public String getTopNSample1(@RequestParam(value = "input") String input) {
-        return booksService.getBooksSample1(input);
-    }
-
-    /**
-     * Returns answer in JSON format
-     * @param input the prompt that a user entered
-     * @return the answer in JSON
-     */
-    @GetMapping(value = "/topN/sample2", produces = "application/json")
-    @ResponseBody
-    public String getTopNSample2(@RequestParam(value = "input") String input) {
-        return booksService.getBooksSample2(input);
+    @PostMapping(value = "/topN", consumes = "application/json", produces = "application/json")
+    public BookResponseList getTopN(@RequestBody BookRequest request) {
+        return booksService.getBooks(request);
     }
 }
