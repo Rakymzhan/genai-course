@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -46,6 +47,8 @@ public class BooksServiceImpl implements BooksService {
     private final String deploymentOrModelName;
 
     private final ObjectMapper objectMapper;
+
+    private ChatHistory chatHistory;
 
     public BooksServiceImpl(OpenAIAsyncClient aiAsyncClient,
                             Kernel kernel,
@@ -93,8 +96,10 @@ public class BooksServiceImpl implements BooksService {
     public BookResponse getBooksSample3(BookRequest request) {
         log.info(request.toString());
 
-        ChatHistory chatHistory = new ChatHistory();
-        chatHistory.addSystemMessage(SYSTEM_MESSAGE);
+        if (Objects.isNull(chatHistory)) {
+            chatHistory = new ChatHistory();
+            chatHistory.addSystemMessage(SYSTEM_MESSAGE);
+        }
         chatHistory.addUserMessage(request.getPrompt());
 
         InvocationContext context = buildInvocationContext(request);
@@ -119,8 +124,10 @@ public class BooksServiceImpl implements BooksService {
 
     @Override
     public BookResponse getBooksSample4(BookRequest request) {
-        ChatHistory chatHistory = new ChatHistory();
-        chatHistory.addSystemMessage(SYSTEM_MESSAGE);
+        if (Objects.isNull(chatHistory)) {
+            chatHistory = new ChatHistory();
+            chatHistory.addSystemMessage(SYSTEM_MESSAGE);
+        }
 
         InvocationContext context = buildInvocationContext(request);
 
