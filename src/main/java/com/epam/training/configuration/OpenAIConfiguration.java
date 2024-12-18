@@ -23,8 +23,8 @@ public class OpenAIConfiguration {
      * @return an instance of {@link OpenAIAsyncClient}
      */
     @Bean
-    public OpenAIAsyncClient openAIAsyncClient(@Value("${client-azureopenai-key}") String apiKey,
-                                               @Value("${client-azureopenai-endpoint}") String aiEndpoint) {
+    public OpenAIAsyncClient openAIAsyncClient(@Value("${openai.key}") String apiKey,
+                                               @Value("${openai.endpoint}") String aiEndpoint) {
         return new OpenAIClientBuilder()
                 .credential(new AzureKeyCredential(apiKey))
                 .endpoint(aiEndpoint)

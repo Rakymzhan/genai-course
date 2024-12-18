@@ -1,0 +1,196 @@
+{
+  "defaultFormattedPrompt": "%s. Give me the JSON for an object that represents a book. It should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is an string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+  "defaultMaxTokens": 600,
+  "settings": [
+    {
+      "modelId": "Llama-3-8B-Instruct",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": true
+    },
+    {
+      "modelId": "gpt-4o-mini-2024-07-18",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": true
+    },
+    {
+      "modelId": "gpt-35-turbo",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "Mistral-7B-Instruct",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "Mixtral-8x7B-Instruct-v0.1",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "ai21.j2-grande-instruct",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "ai21.j2-jumbo-instruct",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-instant-v1",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-v2",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-v2-1",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-v3-5-sonnet",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-v3-haiku",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-v3-opus",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "anthropic.claude-v3-sonnet",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "chat-bison-32k@002",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "chat-bison@001",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gemini-1.5-flash-001",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gemini-1.5-pro-preview-0409",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gemini-pro",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-35-turbo-0125",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-35-turbo-0301",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-35-turbo-0613",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-35-turbo-1106",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-35-turbo-16k",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-0125-preview",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-0613",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-1106-preview",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-32k",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-32k-0314",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-32k-0613",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-turbo",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4-turbo-2024-04-09",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4o",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": true
+    },
+    {
+      "modelId": "gpt-4o-2024-05-13",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    },
+    {
+      "modelId": "gpt-4o-2024-08-06",
+      "formattedPrompt": null,
+      "jsonSchemaSupported": true
+    },
+    {
+      "modelId": "llama-3-70b-instruct-awq",
+      "formattedPrompt": "%s. Format output as JSON object that contains an array of books. Elements of the array should have the fields \"name\", \"author\" and \"yearOfPublish\" where \"name\" is a string representing of the name of the book, \"author\" is a string representing of an author of the book and \"yearOfPublish\" is a string representing an year of publishing of the book. Also all books should be enclosed in an array of books named \"books\".",
+      "jsonSchemaSupported": false
+    }
+  ]
+}
