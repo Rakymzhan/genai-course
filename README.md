@@ -41,3 +41,24 @@ Some observations:
         Re-running the request helped me.
     7) All the highlighted problems emphasize that different models for the same task can respond differently,
         and it is necessary to make individual adjustments for each model.
+
+Task 4:
+
+Example cURLs:
+curl --location 'http://localhost:8088/api/plugin/check/time' \
+--header 'Content-Type: application/json' \
+--data '{
+"prompt": "What current date and time is it in my city?"
+}'
+
+curl --location 'http://localhost:8088/api/plugin/check/lamp' \
+--header 'Content-Type: application/json' \
+--data '{
+"prompt": "Check state of the lamp in the bathroom. Turn it on if it'\''s off"
+}'
+
+curl --location 'http://localhost:8088/api/plugin/check/weather' \
+--header 'Content-Type: application/json' \
+--data '{
+"prompt": "Give me weather forecast for a week"
+}'

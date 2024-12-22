@@ -1,19 +1,21 @@
 package com.epam.training.configuration;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
-import com.epam.training.plugins.SimplePlugin;
+import com.epam.training.component.HelperComponent;
+import com.epam.training.plugins.CurrentDateTimePlugin;
+import com.epam.training.plugins.LampCheckPlugin;
+import com.epam.training.plugins.WeatherForecastPlugin;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
-import com.microsoft.semantickernel.orchestration.InvocationContext;
-import com.microsoft.semantickernel.orchestration.PromptExecutionSettings;
 import com.microsoft.semantickernel.plugin.KernelPlugin;
 import com.microsoft.semantickernel.plugin.KernelPluginFactory;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Configuration class for setting up Semantic Kernel components.
@@ -23,77 +25,63 @@ import java.util.Map;
  * chat completion services, kernel plugins, kernel instance, invocation context,
  * and prompt execution settings.
  */
-//@Configuration
+@RequiredArgsConstructor
+@Configuration
 public class SemanticKernelConfiguration {
+
+    private final HelperComponent helperComponent;
 
     /**
      * Creates a {@link ChatCompletionService} bean for handling chat completions using Azure OpenAI.
      *
-     * @param deploymentOrModelName the Azure OpenAI deployment or model name
+     * @param deployments the predefined Azure OpenAI deployments
      * @param openAIAsyncClient the {@link OpenAIAsyncClient} to communicate with Azure OpenAI
      * @return an instance of {@link ChatCompletionService}
      */
     @Bean
-    public ChatCompletionService chatCompletionService(@Value("${client-azureopenai-deployment-name}") String deploymentOrModelName,
+    public ChatCompletionService chatCompletionService(@Value("${openai.predefined.deployments}") List<String> deployments,
                                                        OpenAIAsyncClient openAIAsyncClient) {
         return OpenAIChatCompletion.builder()
-                .withModelId(deploymentOrModelName)
+                .withModelId(deployments.getFirst())
                 .withOpenAIAsyncClient(openAIAsyncClient)
                 .build();
     }
 
     /**
-     * Creates a {@link KernelPlugin} bean using a simple plugin.
+     * Creates a {@link KernelPlugin} that helps to get current date and time.
      *
      * @return an instance of {@link KernelPlugin}
      */
     @Bean
-    public KernelPlugin kernelPlugin() {
+    public KernelPlugin currentDateTimePlugin() {
         return KernelPluginFactory.createFromObject(
-                new SimplePlugin(), "Simple Plugin");
+                new CurrentDateTimePlugin(helperComponent), "CurrentDateTime");
+    }
+
+    @Bean
+    public KernelPlugin lampCheckPlugin() {
+        return KernelPluginFactory.createFromObject(
+                new LampCheckPlugin(helperComponent), "LampCheck");
+    }
+
+    @Bean
+    public KernelPlugin weatherPlugin() {
+        return KernelPluginFactory.createFromObject(
+                new WeatherForecastPlugin(helperComponent), "WeatherForecast");
     }
 
     /**
      * Creates a {@link Kernel} bean to manage AI services and plugins.
      *
      * @param chatCompletionService the {@link ChatCompletionService} for handling completions
-     * @param kernelPlugin the {@link KernelPlugin} to be used in the kernel
+     * @param currentDateTimePlugin the {@link KernelPlugin} to be used in the kernel
      * @return an instance of {@link Kernel}
      */
     @Bean
-    public Kernel kernel(ChatCompletionService chatCompletionService, KernelPlugin kernelPlugin) {
+    public Kernel defaultKernel(ChatCompletionService chatCompletionService, KernelPlugin currentDateTimePlugin) {
         return Kernel.builder()
                 .withAIService(ChatCompletionService.class, chatCompletionService)
-                .withPlugin(kernelPlugin)
+                .withPlugin(currentDateTimePlugin)
                 .build();
-    }
-
-    /**
-     * Creates an {@link InvocationContext} bean with default prompt execution settings.
-     *
-     * @return an instance of {@link InvocationContext}
-     */
-    @Bean
-    public InvocationContext invocationContext() {
-        return InvocationContext.builder()
-                .withPromptExecutionSettings(PromptExecutionSettings.builder()
-                        .withTemperature(1.0)
-                        .build())
-                .build();
-    }
-
-    /**
-     * Creates a map of {@link PromptExecutionSettings} for different models.
-     *
-     * @param deploymentOrModelName the Azure OpenAI deployment or model name
-     * @return a map of model names to {@link PromptExecutionSettings}
-     */
-    @Bean
-    public Map<String, PromptExecutionSettings> promptExecutionsSettingsMap(@Value("${client-azureopenai-deployment-name}")
-                                                                            String deploymentOrModelName) {
-        return Map.of(deploymentOrModelName, PromptExecutionSettings.builder()
-                .withTemperature(1.0)
-                .build());
     }
 }
-
