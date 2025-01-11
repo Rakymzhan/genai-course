@@ -2,6 +2,7 @@ package com.epam.training.configuration;
 
 import io.qdrant.client.QdrantClient;
 import io.qdrant.client.QdrantGrpcClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,7 +25,10 @@ public class QdrantConfiguration {
      * @return an instance of {@link QdrantClient}
      */
     @Bean
-    public QdrantClient qdrantClient() {
-        return new QdrantClient(QdrantGrpcClient.newBuilder("localhost", 6334, false).build());
+    public QdrantClient qdrantClient(@Value("${qdrant.host}") String host,
+                                     @Value("${qdrant.port}") int port,
+                                     @Value("${qdrant.use.tls}") boolean useTls) {
+        return new QdrantClient(QdrantGrpcClient.newBuilder(host, port, useTls)
+                .build());
     }
 }
