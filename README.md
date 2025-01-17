@@ -62,3 +62,12 @@ curl --location 'http://localhost:8088/api/plugin/check/weather' \
 --data '{
 "prompt": "Give me weather forecast for a week"
 }'
+
+Task 6:
+To run the task set next VM option:
+-DOPEN_AI_KEY=${your-api-key}
+
+There is a sample laptop price list in /resources/data/laptops.csv.
+The service will use it if no file provided in the /add request body.
+Creating embeddings and ingesting them into Qdrant can take a long time,
+as this file contains almost 2200 records. Trim it if you want to speed up the ingestion process.
